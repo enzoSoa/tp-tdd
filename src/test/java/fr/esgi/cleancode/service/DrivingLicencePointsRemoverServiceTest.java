@@ -1,7 +1,6 @@
 package fr.esgi.cleancode.service;
 
 import fr.esgi.cleancode.database.InMemoryDatabase;
-import fr.esgi.cleancode.exception.InvalidDriverSocialSecurityNumberException;
 import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +39,7 @@ class DrivingLicencePointsRemoverServiceTest {
 
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> service.removePointsFromDrivingLicense(fakeDrivingLicence.getId(), null)
+                () -> service.removePointsFromDrivingLicence(fakeDrivingLicence.getId(), null)
         );
     }
 
@@ -50,7 +49,7 @@ class DrivingLicencePointsRemoverServiceTest {
 
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> service.removePointsFromDrivingLicense(fakeDrivingLicence.getId(), -10)
+                () -> service.removePointsFromDrivingLicence(fakeDrivingLicence.getId(), -10)
         );
     }
 
@@ -60,7 +59,7 @@ class DrivingLicencePointsRemoverServiceTest {
 
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> service.removePointsFromDrivingLicense(fakeDrivingLicence.getId(), 0)
+                () -> service.removePointsFromDrivingLicence(fakeDrivingLicence.getId(), 0)
         );
     }
 
@@ -70,7 +69,7 @@ class DrivingLicencePointsRemoverServiceTest {
 
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> service.removePointsFromDrivingLicense(fakeDrivingLicence.getId(), 13)
+                () -> service.removePointsFromDrivingLicence(fakeDrivingLicence.getId(), 13)
         );
     }
 
@@ -78,7 +77,7 @@ class DrivingLicencePointsRemoverServiceTest {
     @DisplayName("Should set points to 0 if input value is superior to current points")
     void should_set_points_to_0_if_input_value_is_superior_to_current_points() {
 
-        DrivingLicence updatedDrivingLicence = service.removePointsFromDrivingLicense(fakeDrivingLicence.getId(), 8);
+        DrivingLicence updatedDrivingLicence = service.removePointsFromDrivingLicence(fakeDrivingLicence.getId(), 8);
         Assertions.assertEquals(0, updatedDrivingLicence.getAvailablePoints());
     }
 
@@ -86,7 +85,7 @@ class DrivingLicencePointsRemoverServiceTest {
     @DisplayName("Should subtract points from driving licence")
     void should_subtract_points_from_driving_licence() {
 
-        DrivingLicence updatedDrivingLicence = service.removePointsFromDrivingLicense(fakeDrivingLicence.getId(), 4);
+        DrivingLicence updatedDrivingLicence = service.removePointsFromDrivingLicence(fakeDrivingLicence.getId(), 4);
         Assertions.assertEquals(2, updatedDrivingLicence.getAvailablePoints());
     }
 }

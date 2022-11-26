@@ -22,24 +22,24 @@ class DrivingLicenceFinderServiceTest {
 
     @BeforeEach
     void setUpDatabase() {
-        DrivingLicenseCreationService creationService = new DrivingLicenseCreationService(database);
+        DrivingLicenceCreationService creationService = new DrivingLicenceCreationService(database);
 
-        this.fakeDrivingLicence = creationService.createNewDriveLicense("123456789012345");
+        this.fakeDrivingLicence = creationService.createNewDrivingLicence("123456789012345");
     }
 
     @Test
     @DisplayName("Should find a driving licence by id")
     void should_find() {
-        var foundDrivingLicense = service.findById(fakeDrivingLicence.getId());
+        var foundDrivingLicence = service.findById(fakeDrivingLicence.getId());
 
-        Assertions.assertTrue(foundDrivingLicense.isPresent());
+        Assertions.assertTrue(foundDrivingLicence.isPresent());
     }
 
     @Test
     @DisplayName("Should not find a driving licence by id")
     void should_not_find() {
-        var foundDrivingLicense = service.findById(UUID.randomUUID());
+        var foundDrivingLicence = service.findById(UUID.randomUUID());
 
-        Assertions.assertTrue(foundDrivingLicense.isEmpty());
+        Assertions.assertTrue(foundDrivingLicence.isEmpty());
     }
 }

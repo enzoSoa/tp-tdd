@@ -10,12 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 
-public class DriverLicenseCreationServiceTest {
+public class DrivingLicenceCreationServiceTest {
 
     @Mock
     private InMemoryDatabase database = InMemoryDatabase.getInstance();
     @InjectMocks
-    private DrivingLicenseCreationService service = new DrivingLicenseCreationService(database);
+    private DrivingLicenceCreationService service = new DrivingLicenceCreationService(database);
 
     @Test
     @DisplayName("Should not create with bad security number length")
@@ -23,7 +23,7 @@ public class DriverLicenseCreationServiceTest {
 
         Assertions.assertThrows(
             InvalidDriverSocialSecurityNumberException.class,
-            () -> service.createNewDriveLicense("123456789")
+            () -> service.createNewDrivingLicence("123456789")
         );
     }
 
@@ -33,7 +33,7 @@ public class DriverLicenseCreationServiceTest {
 
         Assertions.assertThrows(
                 InvalidDriverSocialSecurityNumberException.class,
-                () -> service.createNewDriveLicense("12345678901234A")
+                () -> service.createNewDrivingLicence("12345678901234A")
         );
     }
 
@@ -43,7 +43,7 @@ public class DriverLicenseCreationServiceTest {
 
         Assertions.assertThrows(
                 InvalidDriverSocialSecurityNumberException.class,
-                () -> service.createNewDriveLicense(null)
+                () -> service.createNewDrivingLicence(null)
         );
     }
 
@@ -52,7 +52,7 @@ public class DriverLicenseCreationServiceTest {
     void should_create_with_security_number() {
 
         Assertions.assertDoesNotThrow(
-                () -> service.createNewDriveLicense("123456789012345")
+                () -> service.createNewDrivingLicence("123456789012345")
         );
     }
 
@@ -60,7 +60,7 @@ public class DriverLicenseCreationServiceTest {
     @DisplayName("Should create with 12 default points")
     void should_create_with_12_points() {
 
-        DrivingLicence drivingLicence = service.createNewDriveLicense("123456789012345");
+        DrivingLicence drivingLicence = service.createNewDrivingLicence("123456789012345");
         Assertions.assertEquals(12, drivingLicence.getAvailablePoints());
     }
 
@@ -68,7 +68,7 @@ public class DriverLicenseCreationServiceTest {
     @DisplayName("Should create with correct UUID")
     void should_create_with_correct_uuid() {
         String socialSecurityNumber = "293456389112345";
-        DrivingLicence drivingLicence = service.createNewDriveLicense(socialSecurityNumber);
+        DrivingLicence drivingLicence = service.createNewDrivingLicence(socialSecurityNumber);
         Assertions.assertEquals(socialSecurityNumber, drivingLicence.getDriverSocialSecurityNumber());
     }
 }

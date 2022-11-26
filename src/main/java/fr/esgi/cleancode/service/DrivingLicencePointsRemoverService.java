@@ -12,7 +12,7 @@ public class DrivingLicencePointsRemoverService {
 
     private final InMemoryDatabase database;
 
-    public DrivingLicence removePointsFromDrivingLicense(UUID drivingLicenceId, Integer points) throws ResourceNotFoundException, IllegalArgumentException {
+    public DrivingLicence removePointsFromDrivingLicence(UUID drivingLicenceId, Integer points) throws ResourceNotFoundException, IllegalArgumentException {
         if (!this.isValidPoints(points)) {
             throw new IllegalArgumentException("The points must be between 1 and 12");
         }
