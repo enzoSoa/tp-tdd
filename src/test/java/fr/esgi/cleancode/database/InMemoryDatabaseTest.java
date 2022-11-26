@@ -17,7 +17,7 @@ class InMemoryDatabaseTest {
         final var id = UUID.randomUUID();
         final var given = DrivingLicence.builder().id(id).build();
 
-        Assertions.assertThatNoException().isThrownBy(() -> db.save(id, given));
+        Assertions.assertThatNoException().isThrownBy(() -> db.saveDrivingLicence(id, given));
         final var actual = db.findById(id);
 
         assertThat(actual).containsSame(given);

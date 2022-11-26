@@ -21,7 +21,7 @@ public final class InMemoryDatabase {
         return INSTANCE;
     }
 
-    public DrivingLicence save(UUID drivingLicenceId, DrivingLicence drivingLicenceToSave) {
+    public DrivingLicence saveDrivingLicence(UUID drivingLicenceId, DrivingLicence drivingLicenceToSave) {
         IN_MEMORY_DATABASE.put(drivingLicenceId, drivingLicenceToSave);
         return drivingLicenceToSave;
     }
