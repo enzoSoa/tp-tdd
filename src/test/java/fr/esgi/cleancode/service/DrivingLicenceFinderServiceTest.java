@@ -1,28 +1,45 @@
 package fr.esgi.cleancode.service;
 
 import fr.esgi.cleancode.database.InMemoryDatabase;
+import fr.esgi.cleancode.model.DrivingLicence;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
+import java.util.UUID;
+
 class DrivingLicenceFinderServiceTest {
+    @Mock
+    private InMemoryDatabase database = InMemoryDatabase.getInstance();
 
     @InjectMocks
-    private DrivingLicenceFinderService service;
+    private DrivingLicenceFinderService service = new DrivingLicenceFinderService(database);
 
-    @Mock
-    private InMemoryDatabase database;
+    DrivingLicence fakeDrivingLicence;
 
-    @Test
-    void should_find() {
+    @BeforeEach
+    void setUpDatabase() {
+        DrivingLicenseCreationService creationService = new DrivingLicenseCreationService(database);
 
+        this.fakeDrivingLicence = creationService.createNewDriveLicense("123456789012345");
     }
 
     @Test
-    void should_not_find() {
+    @DisplayName("Should find a driving licence by id")
+    void should_find() {
+        var foundDrivingLicense = service.findById(fakeDrivingLicence.getId());
 
+        Assertions.assertTrue(foundDrivingLicense.isPresent());
+    }
+
+    @Test
+    @DisplayName("Should not find a driving licence by id")
+    void should_not_find() {
+        var foundDrivingLicense = service.findById(UUID.randomUUID());
+
+        Assertions.assertTrue(foundDrivingLicense.isEmpty());
     }
 }

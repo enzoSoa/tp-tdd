@@ -1,16 +1,21 @@
 package fr.esgi.cleancode.service;
 
+import fr.esgi.cleancode.database.InMemoryDatabase;
 import fr.esgi.cleancode.exception.InvalidDriverSocialSecurityNumberException;
 import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 
 public class DriverLicenseCreationServiceTest {
+
+    @Mock
+    private InMemoryDatabase database = InMemoryDatabase.getInstance();
     @InjectMocks
-    private DriverLicenseCreationService service = new DriverLicenseCreationService();
+    private DrivingLicenseCreationService service = new DrivingLicenseCreationService(database);
 
     @Test
     @DisplayName("Should not create with bad security number length")
