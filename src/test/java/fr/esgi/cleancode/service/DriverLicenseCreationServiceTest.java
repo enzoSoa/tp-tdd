@@ -63,4 +63,12 @@ public class DriverLicenseCreationServiceTest {
         DrivingLicence drivingLicence = service.createNewDriveLicense("123456789012345");
         Assertions.assertEquals(12, drivingLicence.getAvailablePoints());
     }
+
+    @Test
+    @DisplayName("Should create with correct UUID")
+    void should_create_with_correct_uuid() {
+        String socialSecurityNumber = "293456389112345";
+        DrivingLicence drivingLicence = service.createNewDriveLicense(socialSecurityNumber);
+        Assertions.assertEquals(socialSecurityNumber, drivingLicence.getDriverSocialSecurityNumber());
+    }
 }
